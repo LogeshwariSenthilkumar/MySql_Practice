@@ -1,0 +1,24 @@
+create database college;
+
+use college;
+
+create table Student
+(
+id int,
+name varchar(20),
+marks int
+);
+
+INSERT INTO Student VALUES
+(1, 'Arun', 85),
+(2, 'Bala', 72),
+(3, 'Chitra', 90),
+(4, 'Divya', 65),
+(5, 'Eshan', 78),
+(6, 'Farhan', 88),
+(7, 'Geetha', 55),
+(8, 'Hari', 92),
+(9, 'Indhu', 60),
+(10, 'Jagan', 81);
+
+select * from student where marks between 60 and 80;
