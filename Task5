@@ -1,0 +1,22 @@
+create database Ecommerce;
+use Ecommerce;
+create table Orders(
+orderid int,
+cust_name varchar(30),
+price int,
+year int
+);
+
+INSERT INTO Orders VALUES
+(1, 'Arun', 2500, 2014),
+(2, 'Bala', 4800, 2014),
+(3, 'Chitra', 3200, 2015),
+(4, 'Divya', 1500, 2016),
+(5, 'Eshan', 6000, 2014),
+(6, 'Farhan', 4200, 2017),
+(7, 'Geetha', 2800, 2014),
+(8, 'Hari', 5200, 2018),
+(9, 'Indhu', 3700, 2014),
+(10, 'Jagan', 4500, 2019);
+
+select * from Orders where year=2014;
