@@ -1,0 +1,21 @@
+use Company;
+create table Employee (
+id int,
+name varchar(20),
+salary int
+);
+
+INSERT INTO Employee VALUES
+(1, 'Arun', 35000),
+(2, 'Bala', 42000),
+(3, 'Chitra', 28000),
+(4, 'Divya', 50000),
+(5, 'Eshan', 32000),
+(6, 'Farhan', 45000),
+(7, 'Geetha', 38000),
+(8, 'Hari', 60000),
+(9, 'Indhu', 27000),
+(10, 'Jagan', 52000);
+
+
+select * from employee where salary>50000
