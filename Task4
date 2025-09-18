@@ -1,0 +1,24 @@
+create database Customer;
+use Customer;
+create table CustomerDetails (
+cus_id int,
+cus_name varchar(20),
+cus_address varchar(30)
+);
+
+INSERT INTO CustomerDetails VALUES
+(1, 'Arun', 'Chennai'),
+(2, 'Bala', 'Coimbatore'),
+(3, 'Chitra', 'Erode'),
+(4, 'Divya', 'Madurai'),
+(5, 'Eshan', 'Salem'),
+(6, 'Farhan', 'Trichy'),
+(7, 'Geetha', 'Tirunelveli'),
+(8, 'Hari', 'Vellore'),
+(9, 'Indhu', 'Thanjavur'),
+(10, 'Jagan', 'Kanchipuram'),
+(11, 'Karthik', 'Bangalore'),
+(12, 'Meena', 'Bangalore'),
+(13, 'Prakash', 'Bangalore');
+
+select * from CustomerDetails where cus_address="Chennai" or cus_address="Bangalore";
