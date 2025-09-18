@@ -1,0 +1,21 @@
+create database Ecommerce;
+use Ecommerce;
+create table ProductDetails(
+pro_id int,
+pro_name varchar(30),
+price int
+);
+
+INSERT INTO ProductDetails VALUES
+(1, 'Laptop', 55000),
+(2, 'Smartphone', 25000),
+(3, 'Headphones', 2000),
+(4, 'Smartwatch', 8000),
+(5, 'Keyboard', 1500),
+(6, 'Mouse', 800),
+(7, 'Monitor', 12000),
+(8, 'Printer', 7000),
+(9, 'Tablet', 18000),
+(10, 'Speakers', 3500);
+
+select * from ProductDetails where pro_name like 's%';
