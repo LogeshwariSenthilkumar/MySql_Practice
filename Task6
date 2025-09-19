@@ -1,0 +1,32 @@
+create database Emp; 
+use Emp; 
+create table Employee( 
+Emp_id int, 
+Emp_name varchar(20), 
+dept varchar(20), 
+salary int, 
+city varchar(30), 
+joinDate date 
+); 
+INSERT INTO Employee VALUES 
+(1, 'Arun', 'IT', 55000, 'Chennai', '2022-03-15'), 
+(2, 'Bala', 'HR', 40000, 'Coimbatore', '2023-01-10'), 
+(3, 'Chitra', 'Finance', 48000, 'Madurai', '2021-07-22'), 
+(4, 'Divya', 'IT', 60000, 'Salem', '2023-05-11'), 
+(5, 'Eshan', 'Sales', 37000, 'Tirunelveli', '2022-11-01'), 
+(6, 'Farhan', 'Finance', 52000, 'Bangalore', '2023-02-05'), 
+(7, 'Geeta', 'HR', 45000, 'Hyderabad', '2020-09-19'), 
+(8, 'Hari', 'Marketing', 30000, 'Vellore', '2021-08-25'), 
+(9, 'Indhu', 'Finance', 58000, 'Thanjavur', '2023-03-16'), 
+(10, 'Jagan', 'IT', 47000, 'Kanchipuram', '2019-04-12'), 
+(11, 'Karthik', 'Sales', 62000, 'Nagpur', '2021-06-30'), 
+(12, 'Meena', 'Finance', 39000, 'Erode', '2022-12-01'), 
+(13, 'Naveen', 'HR', 41000, 'Kanpur', '2023-07-14'), 
+(14, 'Prakash', 'IT', 52000, 'Puducherry', '2022-02-28'), 
+(15, 'Ramya', 'Finance', 35000, 'Noida', '2023-04-18'), 
+(16, 'Sanjay', 'IT', 56000, 'Nagpur', '2023-06-10'), 
+(17, 'Sneha', 'Sales', 43000, 'Jaipur', '2020-11-05'), 
+(18, 'Suresh', 'Marketing', 47000, 'Chandrapur', '2021-05-07'), 
+(19, 'Swati', 'HR', 51000, 'Udaipur', '2023-08-21'), 
+(20, 'Vikram', 'Finance', 64000, 'Bangalore', '2018-12-12'); 
+select * from Employee where salary between 40000 and 60000; 
