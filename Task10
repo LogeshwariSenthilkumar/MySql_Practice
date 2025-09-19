@@ -1,0 +1,1 @@
+select * from Employee where Emp_name like '_____'; 
