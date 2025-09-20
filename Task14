@@ -1,0 +1,2 @@
+select * from Employee where salary > ANY (select salary from Employee where 
+dept='Finance'); 
