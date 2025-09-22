@@ -1,0 +1,5 @@
+//1.all records:
+update Employee set name="Logu"; 
+
+//2.particular records:
+update Employee set name="Senthil" where id=2;
