@@ -1,0 +1,5 @@
+//1. all records:
+delete from Employee;
+
+//2.particular records:
+delete from employee where id=2;
