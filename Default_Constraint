@@ -1,0 +1,17 @@
+//1.default:
+
+//1.1 while table creation:
+
+create table menu(
+sno int,
+food varchar(30),
+price int default 0
+);
+
+//1.2 after table creation:
+
+alter table menu alter price set default 0;
+
+//1.3 delete:
+
+alter table menu alter price drop default;
