@@ -1,0 +1,17 @@
+\\1.unique:
+\\1.1.while creating table:
+
+create table employee(
+id int unique,
+name varchar(20)
+);
+
+
+\\1.2. after Table Creation:
+
+
+alter table Employee add constraint uni_id unique(id);
+
+\\1.3 delete:
+
+alter table employee drop constraint uni_id;
