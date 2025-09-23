@@ -1,0 +1,42 @@
+//1.Aggregate functions:
+
+//1.1 min():
+
+
+select min(salary) as min_salary from employee;
+
+
+//1.2 max():
+
+select max(salary) as max_salary from employee;
+
+
+//1.3 avg():
+
+select avg(salary) as avg_salary from employee;
+
+
+
+//1.4 sum();
+
+select sum(salary) as total_salary from employee;
+
+
+//1.5 round();
+
+select round(avg(salary)) as avg_salary from employee;
+
+
+select round(avg(salary)) as avg_salary from employee;
+
+
+//1.6 count();
+
+
+select count(emp_id) as total_count from employee;
+
+
+
+
+
+
