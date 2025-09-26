@@ -1,0 +1,20 @@
+//Numeric Functions:
+
+//ceiling():
+select ceiling(30.3);
+
+//floor():
+select floor(30.3);
+
+//sqrt():
+select sqrt(49);
+
+//power():
+select power(3,2);
+
+//greatest():
+select greatest(30,40,90);
+
+//least():
+select least(30,40,90);
+
