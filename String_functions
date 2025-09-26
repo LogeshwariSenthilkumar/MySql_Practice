@@ -1,0 +1,64 @@
+//String Functions:
+
+//ascii():
+select ascii('A');
+
+//lower()/lcase():
+select lower("LOGESHWARI");
+select lcase("LOGESHWARI");
+
+//upper()/ucase():
+select upper("logeshwari");
+select ucase("logeshwari");
+
+//char_length()/character_length():
+select char_length("Logu");
+select character_length("Logu");
+
+//length():
+select length("Logu");
+
+//trim():
+select trim("  Logu");
+
+//left():
+select left("Logeshwari",3);
+
+//right():
+select right("Logeshwari",3);
+
+//position():
+select position("Log" in "Logeshwari");
+
+//replace():
+select replace("Logu Sql","Sql","Welcome");
+
+//reverse():
+select reverse("Logu");
+
+//concate():
+select concat("Logu","-","0");
+
+//repeat():
+select repeat("Hi",3);
+
+//substring():
+select substring("Logeshwari",3,6);
+
+//format():
+select format(2023949.59858,3);
+
+//insert():
+select insert("Logu",2,0,"Senthil");
+select insert("Logu",2,2,"Senthil");
+
+
+
+
+
+
+
+
+
+
+
