@@ -1,0 +1,20 @@
+//joins:
+//inner join:
+select e.ename,b.branch_name from employee e inner join branch b on e.branch_id=b.branch_id;
+
+//left join:
+select e.ename,b.branch_name from employee e left join branch b on e.branch_id = b.branch_id;
+
+//right join:
+select e.ename,b.branch_name from employee e right join branch b on e.branch_id=b.branch_id;
+
+//full join:
+select e.ename,b.branch_name from employee e left join branch b on e.branch_id = b.branch_id union
+select e.ename,b.branch_name from employee e right join branch b on e.branch_id=b.branch_id;
+
+//cross join:
+select e.ename,b.branch_name from employee e cross join
+branch b;
+
+//self join:
+select e1.ename,e2.ename from employee e1 join employee e2 on e1.emp_id=e2.branch_id;
