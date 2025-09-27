@@ -1,0 +1,31 @@
+//DateandTime Functions:
+
+//cur_date/current_date:
+select curdate();
+select current_date();
+
+//current_time:
+select current_time();
+
+//now:
+select now();
+
+//current_timestamp:
+select current_timestamp();
+
+//datediff();
+select datediff("2023-04-05","2023-04-03");
+
+//dateadd();
+select date_add("2023-04-09",interval 3 Month);
+
+//datesub();
+select date_sub("2023-04-09",interval 3 year);
+
+//date_format();
+select date_format("2023-05-04","%M%D%Y");
+
+
+
+
+
