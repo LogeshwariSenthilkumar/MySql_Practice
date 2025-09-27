@@ -1,0 +1,23 @@
+//Clauses:
+//1.select:
+select * from employee;
+
+//2.from:
+select * from employee;
+
+//3.limit:
+select * from employee limit 5;
+select * from employee limit 5 offset 5;
+
+//4.where:
+select * from employee where salary>2000000;
+
+//5.order by:
+select * from employee order by salary asc;
+select * from employee order by salary desc;
+
+//6.group by:
+select job_desc,count(emp_id) from employee group by job_desc;
+
+//7.having:
+select job_desc,count(emp_id) from employee group by job_desc having count(emp_id)>2;
