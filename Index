@@ -1,0 +1,16 @@
+//while creating table:
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    ename VARCHAR(30),
+    job_desc VARCHAR(30),
+    salary INT,
+    index index_name(ename)
+);
+
+
+//After table creation:
+create index index_name on employee(ename);
+
+
+//Drop index:
+drop index index_name on employee;
