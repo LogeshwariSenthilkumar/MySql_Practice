@@ -1,0 +1,10 @@
+//creating view:
+create view emp_details as select * from employee;
+select * from emp_details;
+
+//replace view:
+create or replace view emp_details as select * from employee where salary>=2500000;
+select * from emp_details;
+
+//drop view:
+drop view emp_details;
