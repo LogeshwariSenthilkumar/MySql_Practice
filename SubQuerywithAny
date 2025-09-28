@@ -1,0 +1,3 @@
+select * from branch where branch_id=any(select branch_id from employee where salary>2500000);
+
+select * from employee where salary>any(select salary from employee where job_desc="Hr");
