@@ -1,0 +1,15 @@
+select emp_id,ename,job_desc,salary from employee where branch_id=(select branch_id from branch where branch_name="chennai branch");
+
+
+select emp_id,ename,job_desc from employee where salary=(select min(salary) from employee);
+
+
+select * from employee where branch_id=(select branch_id from branch where address="Bangalore");
+
+select * from employee where branch_id=(select branch_id from employee where ename="Ashok");
+
+select * from employee where branch_id=(select branch_id from employee where job_desc="CEO");
+
+
+
+
