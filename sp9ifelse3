@@ -1,0 +1,12 @@
+delimiter $$ 
+create procedure ifelseDemo3(in a char(10))
+begin
+    if a='even' then select * from emp where empno%2=0;
+    elseif a='odd' then select * from emp where empno%2=1;
+    else select 'enter valid character';
+    end if;
+end $$
+delimiter ;
+
+
+call ifelseDemo3('odd');
