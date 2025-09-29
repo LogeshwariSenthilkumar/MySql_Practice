@@ -1,0 +1,11 @@
+
+delimiter $$
+create procedure EmpCount()
+begin
+	declare total int default 0;
+    select count(emp_id) into total from emp;
+    select total;
+end $$
+delimiter ;
+
+call empCount();
