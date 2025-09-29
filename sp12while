@@ -1,0 +1,15 @@
+
+delimiter $$
+create procedure whileDemo()
+begin
+     declare a int default 1;
+     declare c varchar(20) default '';
+     while a<10 do
+     set c=concat(c,a,' ');
+     set a=a+1;
+     end while;
+     select c;
+end $$
+delimiter ;
+
+call whileDemo();
