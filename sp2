@@ -1,0 +1,11 @@
+delimiter $$
+create procedure empminsal()
+begin 
+    declare minsal int;
+    set minsal=0;
+    select min(salary) into minsal from emp;
+    select minsal;
+end $$
+delimiter ;
+
+call empminsal();
