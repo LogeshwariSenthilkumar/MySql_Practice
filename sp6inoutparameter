@@ -1,0 +1,11 @@
+delimiter $$
+create procedure counters(inout count int,in val int)
+begin 
+    set count=count+val;
+end $$
+delimiter ;
+
+set @count=10;
+call counters(@count,3);
+call counters(@count,7);
+select @count;
