@@ -1,0 +1,24 @@
+delimiter $$
+create procedure backupstable()
+begin
+     declare empno INT;
+    declare ename VARCHAR(30);
+   declare job VARCHAR(30);
+    declare salary DECIMAL(10,2);
+    declare val int default 0;
+     declare cur cursor for select * from emp;
+     declare exit handler for not found set val=1;
+     delete from empbackup;
+     open cur;
+     label:loop
+     if val=1 then leave label;
+     end if;
+     fetch cur into empno,ename,job,salary;
+     insert into empbackup values(empno,ename,job,salary);
+     end loop;
+     close cur;
+end $$
+delimiter ;
+
+call backupstable();
+select * from empbackup;
