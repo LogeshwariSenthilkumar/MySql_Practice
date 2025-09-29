@@ -1,0 +1,11 @@
+delimiter $$
+create procedure ifelseDemo(in val int)
+begin 
+     if val=1 then select "hi";
+     elseif val=2 then select 'Hello';
+     else select "welcome";
+     end if;
+end $$
+delimiter ;
+
+call ifelseDemo(4);
