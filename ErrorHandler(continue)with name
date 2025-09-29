@@ -1,0 +1,21 @@
+delimiter $$
+create procedure insertdemo(
+in empno INT,
+    ename VARCHAR(30),
+    job VARCHAR(30),
+    salary DECIMAL(10,2),
+    branch_id INT
+)
+begin 
+    declare dup condition for 1062;
+    declare continue handler for dup
+    begin
+        select 'Duplicate key';
+	end ;
+    insert into emp values(empno,ename ,job,salary,branch_id);
+    select * from emp;
+end $$;
+delimiter ;
+
+
+call insertdemo(1,"Logu",'It',30000,101);
