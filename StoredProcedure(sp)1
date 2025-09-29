@@ -1,0 +1,16 @@
+//creating:
+
+
+DELIMITER $$
+CREATE PROCEDURE emps()
+BEGIN
+   SELECT * FROM emp;
+END $$
+DELIMITER ;
+
+CALL emps();
+
+
+//drop:
+
+drop procedure emps;
