@@ -1,0 +1,11 @@
+delimiter $$
+create procedure empreturntotal(
+out total int
+)
+begin
+    select count(emp_id) into total from emp;
+end $$
+delimiter ;
+
+call empreturntotal(@total);
+select @total;
