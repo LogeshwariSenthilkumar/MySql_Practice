@@ -1,0 +1,10 @@
+delimiter $$
+create procedure empcountbyjds(
+in jds varchar(30)
+)
+begin
+     select count(emp_id) from emp where job=jds;
+end $$
+delimiter ;
+
+call empcountbyjds('Manager');
