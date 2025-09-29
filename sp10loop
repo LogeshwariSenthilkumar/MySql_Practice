@@ -1,0 +1,16 @@
+
+delimiter $$
+create procedure loopdemo()
+begin
+     declare a int default 0;
+     declare c varchar(30) default '';
+     labelloop:loop
+     if a>10 then leave labelloop;
+     end if;
+     set c=concat(c,a,' ');
+     set a=a+1;
+     end loop;
+     select c;
+end $$
+delimiter ;
+call loopdemo();
