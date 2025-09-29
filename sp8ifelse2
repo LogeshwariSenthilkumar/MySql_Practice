@@ -1,0 +1,10 @@
+delimiter $$
+create procedure ifelseDemo2(in val int)
+begin
+     if val%2=0 then select 'Number is even';
+     else select 'Number is odd';
+     end if;
+end $$
+delimiter ;
+
+call ifelseDemo2(1);
