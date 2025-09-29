@@ -1,0 +1,11 @@
+delimiter $$
+create procedure switchdemo(in val int)
+begin
+    case val
+    when 1 then select 'hi';
+    when 2 then select 'hello';
+    end case;
+end $$
+delimiter ;
+
+call switchdemo(2);
