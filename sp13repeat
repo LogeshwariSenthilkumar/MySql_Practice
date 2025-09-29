@@ -1,0 +1,16 @@
+
+delimiter $$ 
+create procedure repeatDemo()
+begin 
+      declare a int default 1;
+	  declare c varchar(60) default ' ';
+      repeat
+      set c=concat(c,a,' ');
+      set a=a+1;
+      until a>10
+      end repeat;
+      select c;
+end $$
+delimiter ;
+
+call repeatDemo();
