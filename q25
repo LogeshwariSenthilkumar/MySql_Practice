@@ -1,0 +1,1 @@
+select job_desc,count(emp_id) from employee group by job_desc having count(emp_id)>1;
