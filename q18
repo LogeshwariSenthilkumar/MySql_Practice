@@ -1,0 +1,8 @@
+select * from employee order by(
+case job_desc
+when "CEO" then 1
+when "Manager" then 2
+when "Admin" then 3
+when "Engineer" then 4
+else 10 end
+);
