@@ -1,0 +1,1 @@
+select job_desc,count(emp_id) from employee where salary>1500000 group by job_desc having count(emp_id)>1;
