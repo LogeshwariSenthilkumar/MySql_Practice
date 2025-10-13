@@ -1,0 +1,27 @@
+use collegedb;
+select * from student;
+select ucase(Student_name) from student;
+select lcase(student_name) from student;
+select length(student_name) from student;
+select left(student_name,3) from student;
+select concat(student_name,"-",branch) from student;
+select replace(branch,'CSE',"Computer Science") from student;
+select trim(Student_name) from student;
+
+select round(marks) from student;
+select ceiling(marks) from student;
+select floor(marks) from student;
+select sum(marks) from student;
+select avg(marks) from student;
+select min(marks),max(marks) from student;
+select balance,abs(balance) from student;
+
+select curdate();
+select current_time();
+select now();
+select dob,date_add(dob,interval 7 day) from student;
+select dob,date_sub(dob,interval 1 month) from student;
+select dob,datediff(dob,curdate()) from student;
+select year(dob),month(dob),day(dob) from student;
+
+
