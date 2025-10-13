@@ -1,0 +1,18 @@
+use  collegedb;
+
+describe student;
+
+insert into student values(1,"Logeshwari",22,'CSE');
+insert into student values(2,"Sanjay",26,'EEE'),(3,"Chitra",45,'IT'),(4,"Senthil",46,'EEE');
+
+select * from student;
+select sname,branch from student ;
+select * from student where branch='CSE';
+
+set sql_safe_updates=0;
+update  student set branch='IT' where sname="Logeshwari";
+delete from student where sid=1;
+
+select * from student order by sname asc;
+select * from student limit 2;
+select * from student where branch='It' and age>20;
