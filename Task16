@@ -1,0 +1,33 @@
+create database collegedb;
+
+use collegedb;
+
+create table student 
+(
+sid int primary key,
+sname varchar(50),
+age int,
+branch varchar(30)
+);
+
+describe student;
+
+alter table student add column email varchar(50);
+
+alter table student modify column branch varchar(50);
+
+alter table student drop column age;
+
+drop table student;
+
+drop database collegeDb;
+
+rename table student to collegestudent;
+
+create table department(
+did int primary key ,
+dname varchar(50) unique,
+location varchar(50) not null
+);
+
+describe department;
