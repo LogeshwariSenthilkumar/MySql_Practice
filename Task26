@@ -1,0 +1,67 @@
+
+CREATE DATABASE joins_simple;
+USE joins_simple;
+
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50),
+    location VARCHAR(50)
+);
+
+
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(50),
+    age INT,
+    branch VARCHAR(30),
+    marks DECIMAL(5,2),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+
+INSERT INTO Department VALUES
+(1, 'IT', 'Chennai'),
+(2, 'CSE', 'Coimbatore'),
+(3, 'ECE', 'Bangalore'),
+(4, 'EEE', 'Madurai'),
+(5, 'MECH', 'Salem'),
+(6, 'CIVIL', 'Trichy');
+
+
+INSERT INTO Student VALUES
+(101, 'Logeshwari', 21, 'CSE', 88.50, 2),
+(102, 'Dhivya', 20, 'IT', 76.00, 1),
+(103, 'Kavin', 22, 'ECE', 65.00, 3),
+(104, 'Meena', 21, 'CSE', 91.00, 2),
+(105, 'Ragul', 22, 'EEE', 59.00, 4),
+(106, 'Saran', 21, 'MECH', 72.00, 5),
+(107, 'Deepika', 20, 'IT', 83.00, 1),
+(108, 'Praveen', 23, 'ECE', 69.50, 3),
+(109, 'Harini', 21, 'CSE', 94.00, 2),
+(110, 'Vignesh', 22, 'CIVIL', 68.00, NULL);  
+
+select * from student;
+select * from department;
+
+select student_name,dept_name,location from student inner join department on student.dept_id=department.dept_id;
+select s.student_name,s.marks,d.dept_name from student s inner join department d on s.dept_id=d.dept_id where s.marks>80;
+select s.student_name,d.dept_name from student s inner join department d on s.dept_id =d.dept_id where dept_name='It';
+select s.student_name,s.branch,d.dept_name,d.location from student s inner join department d on s.dept_id=d.dept_id where s.marks>85;
+
+select s.student_name,d.dept_name from student s left join department d on s.dept_id=d.dept_id;
+select s.student_name,d.dept_name from department d left join student s on d.dept_id=s.dept_id;
+select s.student_name,d.dept_name from student s left join department d on s.dept_id=d.dept_id where d.dept_name is null;
+
+select d.dept_name,s.student_name from student s right join department d on s.dept_id=d.dept_id;
+select d.dept_name,s.student_name from student s right join department d on s.dept_id =d.dept_id where s.marks<90;
+
+select s.student_name,d.dept_name from student s left join department d on s.dept_id=d.dept_id union
+select s.student_name,d.dept_name from student s right join department d on s.dept_id=d.dept_id;
+
+select s.student_name,d.dept_name from student s cross join department d;
+select count(student_name) from student cross join department d;
+
+
+
+
+
