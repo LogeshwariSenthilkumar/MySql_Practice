@@ -1,0 +1,120 @@
+use collegedb;
+select * from student;
+describe student;
+
+delimiter $$
+create procedure getallstudents()
+begin 
+	select * from student;
+end $$
+delimiter ;
+
+call getallstudents();
+
+delimiter $$
+create procedure getstudentbyid(in id int)
+begin
+	select * from student where student_id=id;
+end $$
+delimiter ;
+
+call getstudentbyid(4);
+
+delimiter $$
+create procedure getstudentsbybranch(in brh varchar(30))
+begin
+	select * from student where branch=brh;
+end $$
+delimiter ;
+call getstudentsbybranch('CSE');
+
+delimiter $$
+create procedure getavgmarks()
+begin
+	select avg(marks) from student;
+end $$
+delimiter ;
+call getavgmarks();
+
+delimiter $$
+create procedure addstudent(in student_id	int,
+student_name	varchar(50),
+age	int,
+branch	varchar(30),
+email	varchar(50),
+marks	decimal(5,2),
+balance	decimal(10,2),
+dob	date)
+begin 
+	insert into student values(student_id,student_name,age,branch,email,marks,balance,dob);
+end $$
+delimiter ;
+
+call addstudent(6,"Bharath",21,"IT","bharath@gmail.com",90.89,500,'2004-11-15');
+
+delimiter $$
+create procedure updatemarks(in marks int,in id int)
+begin 
+	update student set marks=marks where student_id=id;
+end $$
+delimiter ;
+
+set sql_safe_updates=0;
+call updatemarks(90.78,3);
+
+delimiter $$
+create procedure deletestudent(in id int)
+begin
+	delete from student where student_id=id;
+end $$
+delimiter ;
+
+call deletestudent(5);
+
+
+delimiter $$
+create procedure getstudentcount(out total int)
+begin
+	select count(student_id) into total from student;
+end $$
+delimiter ;
+
+call getstudentcount(@total);
+select @total;
+
+delimiter $$
+create procedure  checkpassfail(in id int)
+begin
+	declare mark int;
+	select marks from student where student_id=id into mark;
+    if mark>=40 then select 'pass';
+    else select 'fail';
+    end if;
+end $$
+delimiter ;
+
+call checkpassfail(3);
+
+
+delimiter $$ 
+create procedure printallstudentnames()
+begin
+	declare done int default 0;
+    declare names varchar(50);
+    declare stu_cur cursor for select student_name from student;
+    declare continue handler for not found set done=1;
+    open stu_cur;
+    readloop:loop
+    fetch stu_cur into names;
+    if done=1 then
+    leave readloop;
+    end if;
+    select names;
+    end loop;
+    close stu_cur;
+end $$
+delimiter ;
+
+    
+
+call printallstudentnames();
