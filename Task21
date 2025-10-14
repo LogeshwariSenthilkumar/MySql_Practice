@@ -1,0 +1,209 @@
+use collegedb;
+select * from student;
+
+
+create table log(
+aid int primary key auto_increment,
+aname varchar(60),
+atime date
+);
+delimiter $$
+create trigger afterstudentinsert 
+after insert on student
+for each row
+begin
+	insert into log (aname,atime) values (concat('student is inserted',new.student_name),now());
+end $$
+delimiter ; 
+
+insert into student values(7,"Janani",21,'CSE','janani@gmail.com',78.90,500,'2004-08-27');
+select * from log;
+
+delimiter $$
+create trigger beforestudentinsert
+before insert on student 
+for each row
+begin
+	if new.marks <0 then
+    signal sqlstate '45000' set message_text="Cannot be inserted";
+    end if;
+end $$
+delimiter ;
+
+insert into student values(10,"Jan",21,'CSE','jan@gmail.com',-78.90,500,'2004-08-20');
+
+
+create table markslog(
+id int primary key auto_increment,
+oldmarks int,
+newmarks int,
+aname varchar(60),
+atime date
+);
+
+delimiter $$
+create trigger aftermarksupdate
+after update on student
+for each row
+begin
+	insert into markslog(oldmarks,newmarks,aname,atime) values(old.marks,new.marks,concat('new marks updated',new.marks),now());
+end $$
+delimiter ;
+
+set sql_safe_updates=0;
+update student set marks=90 where student_id=1;
+select * from markslog;
+
+DELIMITER $$
+CREATE TRIGGER BeforeBalanceUpdate
+BEFORE UPDATE ON Student
+FOR EACH ROW
+BEGIN
+    IF NEW.balance < -500 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Balance cannot be less than -500';
+    END IF;
+END$$
+DELIMITER ;
+update student set balance=-900 where student_id=3;
+
+
+create table deletelog(
+id int primary key auto_increment,
+dname varchar(40)
+);
+
+delimiter $$
+create trigger afterstudentdelete
+after delete on student
+for each row
+begin
+	insert into deletelog(dname) values (concat('deleted',old.student_name));
+end $$
+delimiter ;
+
+set sql_safe_updates=0;
+delete from student where student_id=8;
+select * from deletelog;
+
+
+create table ctable(
+id int primary key auto_increment,
+cmsg varchar(50)
+);
+delimiter $$
+create trigger checkpassafterinsert
+after insert on student
+for each row
+begin
+    if new.marks>30 then
+	 insert into ctable(cmsg) values('pass');
+    else 
+	insert into ctable(cmsg) values('fail');
+    end if;
+end $$
+delimiter ;
+
+insert into student values(11,"Janani",21,'CSE','j@gmail.com',78.90,500,'2004-08-27');
+select * from ctable;
+
+
+
+create table dtable
+(
+id int primary key auto_increment,
+dmsg varchar(60)
+);
+DELIMITER $$
+CREATE TRIGGER BeforeInsertCheckAge
+BEFORE INSERT ON Student
+FOR EACH ROW
+BEGIN
+    IF NEW.age < 18 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Student must be at least 18 years old';
+    END IF;
+END$$
+
+CREATE TRIGGER AfterInsertCongratulate
+AFTER INSERT ON Student
+FOR EACH ROW
+BEGIN
+    insert into dtable(dmsg) values('congrats');
+END$$
+DELIMITER ;
+
+insert into student values(13,"Ja",12,'CSE','lo@gmail.com',78.90,500,'2004-08-27');
+select * from dtable;
+
+DELIMITER $$
+CREATE TRIGGER BeforeStudentDeptInsert
+BEFORE INSERT ON Student_Department
+FOR EACH ROW
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Department WHERE dept_id = NEW.dept_id) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Department does not exist';
+    END IF;
+END$$
+DELIMITER ;
+
+CREATE TABLE MarksHistory (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT,
+    student_name VARCHAR(50),
+    old_marks INT,
+    new_marks INT,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+DELIMITER $$
+
+CREATE TRIGGER AfterMarksUpdate
+AFTER UPDATE ON Student
+FOR EACH ROW
+BEGIN
+    IF OLD.marks <> NEW.marks THEN
+        INSERT INTO MarksHistory(student_id, student_name, old_marks, new_marks)
+        VALUES (OLD.student_id, OLD.student_name, OLD.marks, NEW.marks);
+    END IF;
+END $$
+
+DELIMITER ;
+
+-- Suppose a student's marks change
+UPDATE Student
+SET marks = 95
+WHERE student_id = 103;
+
+SELECT * FROM MarksHistory;
+
+
+CREATE TABLE Student_Department (
+    stud_id INT PRIMARY KEY,
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+DELIMITER $$
+
+CREATE TRIGGER CheckDepartmentLimit
+BEFORE INSERT ON Student_Department
+FOR EACH ROW
+BEGIN
+    DECLARE total_students INT;
+
+    SELECT COUNT(*) INTO total_students
+    FROM Student_Department
+    WHERE dept_id = NEW.dept_id;
+
+    IF total_students >= 10 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot add more students. Department limit (10) reached.';
+    END IF;
+END $$
+
+DELIMITER ;
+
+-- Fill one department with 10 students
+INSERT INTO Student_Department VALUES (201, 1), (202, 1), (203, 1), (204, 1),
+(205, 1), (206, 1), (207, 1), (208, 1), (209, 1), (210, 1);
+
+
+INSERT INTO Student_Department VALUES (211, 1);
+
