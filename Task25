@@ -1,0 +1,28 @@
+CREATE DATABASE selfjoin_demo;
+USE selfjoin_demo;
+
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    designation VARCHAR(50),
+    manager_id INT
+);
+INSERT INTO Employee VALUES
+(1, 'Logeshwari', 'CEO', NULL),
+(2, 'Dhivya', 'Project Manager', 1),
+(3, 'Kavin', 'Team Lead', 2),
+(4, 'Meena', 'Developer', 3),
+(5, 'Ragul', 'Developer', 3),
+(6, 'Saran', 'Tester', 2),
+(7, 'Harini', 'HR', 1),
+(8, 'Vignesh', 'Intern', 4),
+(9, 'Deepika', 'Intern', 5);
+
+select * from employee;
+
+select e1.emp_name,e2.emp_name from employee e1 join employee e2 on e1.emp_id = e2.manager_id;
+
+select e1.emp_name,e2.emp_name from employee e1 join employee e2 on e1.emp_id = e2.manager_id where e2.manager_id is not null;
+select e2.emp_name,count(e1.emp_id) from employee e1 join employee e2 on e1.manager_id=e2.emp_id group by e2.emp_name;
+
+
