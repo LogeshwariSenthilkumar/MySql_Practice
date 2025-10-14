@@ -1,0 +1,26 @@
+use collegedb;
+select * from student;
+
+create view studentview as select student_name,branch,marks from student;
+select * from studentview;
+
+create view csestudents as select * from student where branch='CSE';
+select * from csestudents;
+
+create view studentdeptview as select student_name,dept_name from student inner join department on student.student_id=department.dept_id;
+select * from studentdeptview;
+
+create view deptstudentcount as select d.dept_name,count(s.student_id) as st from department d left join student s on d.dept_id=s.dept_id group by d.dept_name;
+select * from deptstudentcount;
+
+set sql_safe_updates=0;
+update studentview set student_name='DD' where marks=92.50;
+
+create index idx_name on student(student_name);
+drop index idx_name on student;
+
+create index idx_bm on student(student_name,marks);
+ select * from student where marks>80;
+create unique index idx on student(email);
+
+ 
