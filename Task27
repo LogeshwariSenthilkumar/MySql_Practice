@@ -1,0 +1,14 @@
+use collegedb;
+
+select * from student;
+select * from student where marks=(select max(marks) from student);
+select * from student where age=(select min(age) from student);
+select * from student where marks > (select avg(marks) from student);
+select * from student where branch in (select branch from student group by branch having count(student_id)>1);
+select * from student as s1 where age < (select avg(age) from student as s2 where s1.branch=s2.branch);
+select * from student as s1 where marks>(select marks from student as s2 where s2.student_id=3);
+select * from student where student_id in (select student_id from student where marks>70);
+select * from student where branch not in (select branch from student where marks <60);
+select * from student s1 where exists (select 1 from student s2 where s1.branch=s2.branch and s2.marks>80);
+select * from student where not exists (select 1 from student where branch='ECE' and marks<70);
+
