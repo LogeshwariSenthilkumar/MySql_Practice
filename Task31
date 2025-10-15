@@ -1,0 +1,11 @@
+
+/*1.*/
+create index idx_name on student(student_name);
+/*2.*/
+create index idx_branch_marks on student(branch,marks);
+/*3.*/
+explain select * from student where marks>80;
+/*4.*/
+drop index idx_name on student;
+/*5.*/
+create unique index idx_uni_email on student(email);
