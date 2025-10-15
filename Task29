@@ -1,0 +1,181 @@
+/*1.*/
+delimiter $$
+create trigger notexceed
+before insert on student
+for each row
+begin
+	if new.marks>100 then
+    signal sqlstate '45000' set message_text='not exceed marks 100';
+    end if;
+end $$
+delimiter ;
+
+insert into student(student_name,branch,marks,email,dept_id) values('janani','Cse',101,'janani@gmail.com',3);
+
+/*2.*/
+create table afterinsert(
+aid int primary key auto_increment,
+amsg varchar(100),
+atime date
+);
+
+delimiter $$
+create trigger insertdemo
+after insert on student
+for each row 
+begin
+	insert into afterinsert (amsg,atime) values(concat('new record inserted',new.student_name),now());
+end $$
+delimiter ;
+
+insert into student(student_name,branch,marks,email,dept_id) values('janani','Cse',89,'janani@gmail.com',3);
+select * from afterinsert;
+
+/*3.*/
+create table markshis(
+mid int primary key auto_increment,
+oldmarks int,
+newmarks int,
+msg varchar(100)
+);
+delimiter $$
+create trigger updatemarkshis
+after update on student
+for each row
+begin
+	insert into markshis(oldmarks,newmarks,msg) values (old.marks,new.marks,concat('marks updates',new.marks));
+end $$
+delimiter ;
+update student set marks=56 where student_id=10;
+select * from markshis;
+
+/*4.*/
+delimiter $$
+create trigger deletedemo
+before delete
+on student
+for each row
+begin
+	if old.branch='Admin' then
+    signal sqlstate '45000' set message_text='not deleted';
+    end if;
+end $$
+delimiter ;
+
+select * from student;
+update student set branch='admin' where student_id=12;
+set sql_safe_updates=0;
+delete from student where branch='admin';
+
+/*5.*/
+delete from student where student_id=12;
+select * from student;
+
+delimiter $$
+create trigger beforedemo
+before insert on student
+for each row
+begin
+    declare total int;
+    select count(*) into total from student where branch=new.branch;
+	if total>10 then 
+    signal sqlstate '45000' set message_text='Not inserted more than 10 students';
+    end if;
+end $$
+delimiter ;
+
+insert into student(student_name,branch,marks,email,dept_id) values('jani','Cse',89,'uu@gmail.com',3);
+
+
+/*6.*/
+create table tlog(
+tid int primary key auto_increment,
+tmsg varchar(100),
+ttime date
+);
+
+delimiter $$
+create trigger deletedemos
+after delete on student
+for each row
+begin
+	insert into tlog(tmsg,ttime) values(concat('Deleted record',old.student_name),now());
+end $$
+delimiter ;
+
+delete from student where student_id=14;
+select * from tlog;
+/*7.*/
+
+DELIMITER $$
+CREATE TRIGGER updateDeptCount
+AFTER INSERT ON student
+FOR EACH ROW
+BEGIN
+    UPDATE department
+    SET total_students = total_students + 1
+    WHERE dept_id=new.dept_id;
+END $$
+DELIMITER ;
+
+insert into student(student_name,branch,marks,email,dept_id) values('jani','Cse',89,'uu@gmail.com',3);
+
+
+/*8.*/
+DELIMITER $$
+CREATE TRIGGER validateEmail
+BEFORE INSERT ON student
+FOR EACH ROW
+BEGIN
+    IF NEW.email NOT LIKE '%_@_%._%' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Invalid email format';
+    END IF;
+END $$
+DELIMITER ;
+
+insert into student(student_name,branch,marks,email,dept_id) values('jani','Cse',89,'@gmail.com',3);
+
+/*9.*/
+CREATE TABLE AuditTrail(
+    student_id INT,
+    action_type VARCHAR(20),
+    changed_on date
+);
+
+DELIMITER $$
+CREATE TRIGGER auditUpdate
+AFTER UPDATE ON student
+FOR EACH ROW
+BEGIN
+    INSERT INTO AuditTrail(student_id, action_type,changed_on)
+    VALUES(NEW.student_id, 'UPDATED',now());
+END $$
+DELIMITER ;
+select * from student ;
+update student set marks=25 where student_id=1;
+select * from audittrail;
+
+/*10.*/
+CREATE TABLE marks_change_log (
+    student_id INT,
+    old_marks INT,
+    new_marks INT,
+    changed_at date
+);
+
+DELIMITER $$
+CREATE TRIGGER compareMark
+BEFORE UPDATE ON student
+FOR EACH ROW
+BEGIN
+    IF OLD.marks <> NEW.marks THEN
+        INSERT INTO marks_change_log(student_id, old_marks, new_marks,changed_at)
+        VALUES(OLD.student_id, OLD.marks, NEW.marks,now());
+    END IF;
+END $$
+DELIMITER ;
+
+select * from student ;
+update student set marks=85 where student_id=1;
+select * from marks_change_log;
