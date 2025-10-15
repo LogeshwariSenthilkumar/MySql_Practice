@@ -1,0 +1,17 @@
+/*1.*/
+create view student_details as select student_name,branch,marks from student;
+select * from student_details;
+/*2.*/
+create view csestudents as select * from student where branch='CSE';
+select * from csestudents;
+/*3.*/
+create view joinsample as select student_name,dept_name from student s inner join department d on s.dept_id=d.dept_id;
+select * from joinsample;
+/*4.*/
+create view totalstudent as select branch,count(student_id) from student group by branch;
+select * from totalstudent;
+/*5.*/
+set sql_safe_updates=0;
+update student_details set branch='ECE' where student_name='Mani';
+select * from student_details;
+select * from student;
