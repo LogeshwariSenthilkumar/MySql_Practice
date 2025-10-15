@@ -1,0 +1,18 @@
+/*1.*/
+select student_name from student where marks>(select avg(marks) from student);
+/*2.*/
+select student_name from student where marks=(select max(marks) from student);
+/*3.*/
+select student_name from student where dept_id=(select dept_id from student where student_name='karthik');
+/*4.*/
+select max(marks) from student where marks<(select max(marks) from student);
+/*5.*/
+select student_name from student where marks>any(select marks from student where branch='ECE');
+/*6.*/
+select student_name from student where marks<all(select marks from student where branch='CSE');
+/*7.*/
+select student_name from student where dept_id=(select dept_id from department where location='block b');
+/*8.*/
+select * from department where exists (select 1 from student where student.dept_id=department.dept_id);
+/*10.*/
+select * from student where dept_id is null;
