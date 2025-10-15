@@ -1,0 +1,20 @@
+/*1.*/
+select student_name,marks from student ;
+/*2.*/
+select student_name from student where marks>80;
+/*3.*/
+select distinct(branch) from student;
+/*4.*/
+select * from student order by marks asc;
+/*5.*/
+select * from student order by marks desc limit 3;
+/*6.*/
+select count(student_id) from student;
+/*7.*/
+select avg(marks) from student;
+/*8.*/
+select * from student where student_name like 's%';
+/*9.*/
+select * from student where marks between 50 and 90;
+/*10.*/
+select branch,count(student_id) from student group by branch;
