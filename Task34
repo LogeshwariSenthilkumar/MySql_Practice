@@ -1,0 +1,23 @@
+/*1.*/
+select s.student_name,d.dept_name from student s inner join department d on s.dept_id=d.dept_id;
+/*2.*/
+select s.student_name,d.dept_name from student s left join department d on s.dept_id=d.dept_id;
+/*3.*/
+select s.student_name,d.dept_name from student s right join department d on s.dept_id=d.dept_id;
+/*4.*/
+select s.student_name,d.dept_name from student s left join department d on s.dept_id=d.dept_id union select s.student_name,d.dept_name from student s right join department d on s.dept_id=d.dept_id;
+/*5.*/
+select e1.emp_name,e2.emp_name from employee e1 join employee e2 on e1.emp_id=e2.manager_id;
+/*6.*/
+select * from student where dept_id=(select dept_id from department where dept_name='CSE');
+/*7.*/
+select s.student_name,d.dept_name from student s cross join department d;
+/*8.*/
+SELECT d.dept_name, COUNT(s.student_id) AS total_students
+FROM Department d
+INNER JOIN Student s ON s.dept_id = d.dept_id
+GROUP BY d.dept_name
+HAVING total_students > 2;
+
+/*9.*/
+select s.student_name,d.hod_name from student s inner join department d on s.dept_id=d.dept_id;
