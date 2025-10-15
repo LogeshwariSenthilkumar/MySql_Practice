@@ -1,0 +1,110 @@
+/*1.*/
+delimiter $$
+create procedure insertdemo(in student_name VARCHAR(50),
+    branch VARCHAR(10),
+    marks INT,
+    email VARCHAR(100),
+    dept_id INT)
+begin
+	insert into student (student_name,branch,marks,email,dept_id) values(student_name,branch,marks,email,dept_id);
+end $$
+delimiter ;
+
+call insertdemo("Janani",'ECE',50,'janani@gmail.com',3);
+/*2.*/
+delimiter $$
+create procedure updateMarks(in id int,in newmark int)
+begin
+	update student set marks=newmark where student_id=id;
+end $$
+delimiter ; 
+
+set sql_safe_updates=0;
+call updatemarks(11,90);
+
+/*3.*/
+delimiter $$
+create procedure avgmarks()
+begin 
+	select avg(marks) from student;
+end $$
+delimiter ;
+
+call avgmarks();
+
+/*4.*/
+delimiter $$
+create procedure filter(in bh varchar(10))
+begin
+	select * from student where branch=bh;
+end $$
+delimiter ;
+call filter('CSE');
+/*5.*/
+delimiter $$
+create procedure printalldatas()
+begin
+	declare done int default 0;
+    declare allnames varchar(100) default '';
+    declare name varchar(30); 
+    declare cur cursor for select student_name from student;
+    declare continue handler for not found set done=1;
+    open cur;
+    readloop:loop
+    fetch cur into name;
+    if done=1 then
+    leave readloop;
+    end if;
+    set allnames=concat(allnames,name," ");
+    end loop;
+    close cur;
+    select allnames;
+end $$
+delimiter ;
+call printalldatas();
+/*6.*/
+delimiter $$
+create procedure print(in br varchar(10),out count int,inout counter int)
+begin
+	select count(student_id) into count from student where branch=br;
+    set counter=counter+3;
+end $$
+delimiter ;
+set @counter=3;
+call print("CSE",@count,@counter);
+select @count,@counter;
+
+/*7.*/
+delimiter $$
+create procedure grade(in marks int)
+begin
+	if marks>90
+end $$
+delimiter ;
+/*8.*/
+delimiter $$
+create procedure deleterecord(in id int)
+begin
+	 delete from student where student_id=id;
+end $$
+delimiter ;
+set sql_safe_updates=0;
+select * from student;
+call deleterecord(11);
+/*9.*/
+delimiter $$
+create procedure highest()
+begin
+	select d.dept_name,count(student_id) from student s inner join department d on s.dept_id=d.dept_id group by d.dept_name order by count(student_id) desc limit 1;
+end $$
+delimiter ;
+call highest();
+/*10.*/
+delimiter $$
+create procedure totalmarks()
+begin
+	select sum(marks) from student;
+end $$
+delimiter ;
+
+call totalmarks();
