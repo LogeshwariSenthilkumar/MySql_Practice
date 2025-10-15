@@ -1,0 +1,25 @@
+/*1.*/
+select marks from student order by marks desc;
+select max(marks) from student where marks<(select max(marks) from student where marks<(select max(marks) from student));
+/*2.*/
+select student_name,branch,marks from student s1 where marks>(select avg(marks) from student s2 where s1.branch=s2.branch); 
+/*3.*/
+select branch from student group by branch having min(marks)>60;
+/*4.*/
+select student_name,marks from student where marks in(select marks from student group by marks having count(*)>1);
+/*5.*/
+select student_id,Student_name,branch,marks,dense_rank() over (order by marks desc) as  ranks from student;
+/*What DENSE_RANK() Does
+
+DENSE_RANK() is a window function that automatically assigns rank numbers based on an ORDER BY clause —
+it doesn’t skip ranks if there are ties (students with the same marks).*/
+/*6.*/
+select student_name,count(*) from student group by student_name having count(*)>1;
+/*7.*/
+delete s1 from student s1 join student s2 on s1.student_name=s2.student_name and s1.student_id>s2.student_id;
+/*8.*/
+select branch,max(marks),min(marks) from student group by branch;
+/*9.*/
+select student_name,branch from student where marks>(select avg(marks) from student) and branch='cse';
+/*10.*/
+select sum(marks) as total from (select marks from student order by marks desc limit 5) as top_students;
